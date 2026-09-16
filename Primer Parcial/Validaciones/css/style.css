@@ -30,20 +30,17 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
+    padding: 40px 20px;
 }
 
 .card {
-    background: white;
-    border: 1px solid #b2bec3;
-    border-radius: 6px;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
     padding: 20px;
-    width: 280px;
+    width: 300px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
-
 .card h2 {
     font-size: 18px;
     color: #2d3436;
