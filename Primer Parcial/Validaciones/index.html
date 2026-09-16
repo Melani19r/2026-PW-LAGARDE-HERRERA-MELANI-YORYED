@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Talleres - Cecyt 9</title>
+    <title>Catálogo y Registro - Cecyt 9</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+
     <header class="main-header">
         <h1>Catálogo de Talleres - Cecyt 9</h1>
-        <p>Selecciona un taller para registrar tu asistencia</p>
+        <p>Selecciona un taller o regístrate en el formulario de abajo</p>
     </header>
 
+    <!-- Sección del Catálogo -->
     <main class="container-talleres">
         <div class="card">
             <h2>Introduccion a Python</h2>
@@ -31,5 +33,21 @@
             <p><strong>Fecha del taller:</strong> 10/09/2026</p>
         </div>
     </main>
+
+    <!-- Sección del Formulario de Registro (Todo en la misma página) -->
+    <section>
+        <form class="formulario-registro">
+            <h2>Formulario de Registro</h2>
+            
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" class="input-campo" required placeholder="Ingresa tu nombre">
+
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" class="input-campo" required placeholder="correo@ejemplo.com">
+
+            <button type="submit" class="btn-enviar">Registrarse</button>
+        </form>
+    </section>
+
 </body>
 </html>
