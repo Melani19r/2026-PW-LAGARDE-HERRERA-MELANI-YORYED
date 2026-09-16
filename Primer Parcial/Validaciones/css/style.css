@@ -1,76 +1,65 @@
+/* --- 1. Regla propia para el Index y contenedores generales --- */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f7f6;
     margin: 0;
-    padding: 0;
-    color: #333;
+    padding: 20px;
 }
 
-.main-header {
-    background-color: #1a2b4c;
-    color: white;
-    text-align: center;
-    padding: 30px 20px;
-}
-
-.main-header h1 {
-    margin: 0;
-    font-size: 28px;
-    letter-spacing: 1px;
-}
-
-.main-header p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #d1d8e0;
-}
-
-.container-talleres {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 40px 20px;
-}
-
-.card {
+/* --- 2. Regla propia para el formulario de registro --- */
+form.formulario-registro {
     background: #ffffff;
-    border: 1px solid #d1d5db;
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 25px;
     border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-.card h2 {
-    font-size: 18px;
-    color: #2d3436;
-    border-bottom: 1px solid #dfe6e9;
-    padding-bottom: 8px;
-    margin-top: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card p {
-    font-size: 13px;
-    color: #636e72;
-    line-height: 1.4;
-}
-
-.btn-taller {
-    display: inline-block;
-    background-color: #1a2b4c;
-    color: white;
-    padding: 8px 12px;
-    text-decoration: none;
+/* --- 3. Regla propia para cada input --- */
+input.input-campo {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 13px;
-    margin-top: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
-footer {
+/* --- 4. Regla propia para cada botón --- */
+button.btn-enviar {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+/* --- 5. Regla cuando hagan hover sobre el botón --- */
+button.btn-enviar:hover {
+    background-color: #0056b3;
+}
+
+/* --- 6. Regla cuando un input sea inválido (borde rojo / advertencia) --- */
+input.input-campo:invalid:focus {
+    border-color: #dc3545;
+    background-color: #fff8f8;
+    outline: none;
+}
+
+/* --- 7. Regla cuando el registro sea exitoso --- */
+.registro-exitoso {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
     text-align: center;
-    padding: 20px;
-    font-size: 12px;
-    color: #b2bec3;
-    margin-top: 40px;
-    border-top: 1px solid #ddd;
+    max-width: 400px;
+    margin: 20px auto;
 }

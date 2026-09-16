@@ -3,48 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Asistencia - Cecyt 9</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Registro - Tarea</title>
+    <!-- Asegúrate de que la ruta a tu CSS sea correcta -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header class="main-header">
-        <h1>Registro de Asistencia</h1>
-        <p>Grupo 5IV7 - CECyT 9</p>
-    </header>
 
-    <main class="container-talleres">
-        <div class="card" style="width: 100%; max-width: 450px;">
-            <h2>Formulario de Registro</h2>
+    <!-- Ejemplo de mensaje cuando el registro es exitoso (puedes activarlo con JS o dejarlo listo) -->
+    <!-- <div class="registro-exitoso">¡Registro completado con éxito!</div> -->
 
-            <form id="formRegistro">
-                <div style="margin-bottom: 15px;">
-                    <label for="nombre" style="display: block; font-size: 13px; margin-bottom: 5px; color: #2d3436;">Nombre Completo:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Melani Yoryed" style="width: 100%; padding: 8px; border: 1px solid #b2bec3; border-radius: 4px; box-sizing: border-box;">
-                </div>
+    <form class="formulario-registro">
+        <h2>Registro de Usuario</h2>
+        
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" class="input-campo" required placeholder="Ingresa tu nombre">
 
-                <div style="margin-bottom: 15px;">
-                    <label for="boleta" style="display: block; font-size: 13px; margin-bottom: 5px; color: #2d3436;">Número de Boleta:</label>
-                    <input type="text" id="boleta" name="boleta" placeholder="Ej. 2026090000" style="width: 100%; padding: 8px; border: 1px solid #b2bec3; border-radius: 4px; box-sizing: border-box;">
-                </div>
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" class="input-campo" required placeholder="correo@ejemplo.com">
 
-                <div style="margin-bottom: 20px;">
-                    <label for="correo" style="display: block; font-size: 13px; margin-bottom: 5px; color: #2d3436;">Correo institucional o personal:</label>
-                    <input type="email" id="correo" name="correo" placeholder="correo@alumno.ipn.mx" style="width: 100%; padding: 8px; border: 1px solid #b2bec3; border-radius: 4px; box-sizing: border-box;">
-                </div>
+        <button type="submit" class="btn-enviar">Registrarse</button>
+    </form>
 
-                <button type="submit" style="background-color: #1a2b4c; color: white; border: none; padding: 10px 15px; width: 100%; border-radius: 4px; font-size: 14px; cursor: pointer;">Enviar Registro</button>
-            </form>
-
-            <div style="margin-top: 15px; text-align: center;">
-                <a href="index.html" style="font-size: 13px; color: #0984e3; text-decoration: none;">Volver al inicio</a>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>Registro de Asistencia - Cecyt 9</p>
-    </footer>
-
-    <script src="js/validaciones.js"></script>
 </body>
 </html>
