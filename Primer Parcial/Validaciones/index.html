@@ -3,51 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo y Registro - Cecyt 9</title>
+    <title>Catálogo de Talleres - Cecyt 9</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
     <header class="main-header">
         <h1>Catálogo de Talleres - Cecyt 9</h1>
-        <p>Selecciona un taller o regístrate en el formulario de abajo</p>
+        <p>Selecciona un taller para registrar tu asistencia</p>
     </header>
 
-    <!-- Sección del Catálogo -->
     <main class="container-talleres">
         <div class="card">
             <h2>Introduccion a Python</h2>
-            <p><strong>Nombre del Instructor:</strong> Maria Conchita Alonso</p>
-            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <p><strong>Instructor:</strong> Maria Conchita Alonso</p>
+            <p><strong>Fecha:</strong> 10/09/2026</p>
+            <!-- Botón que redirecciona a la página de registro -->
+            <a href="registro.html" class="btn-enviar" style="display: block; text-align: center; text-decoration: none; margin-top: 15px;">Registrarse al taller</a>
         </div>
 
         <div class="card">
             <h2>Redes y chompus</h2>
-            <p><strong>Nombre del Instructor:</strong> Maria Jose Peña</p>
-            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <p><strong>Instructor:</strong> Maria Jose Peña</p>
+            <p><strong>Fecha:</strong> 10/09/2026</p>
+            <!-- Botón que redirecciona a la página de registro -->
+            <a href="registro.html" class="btn-enviar" style="display: block; text-align: center; text-decoration: none; margin-top: 15px;">Registrarse al taller</a>
         </div>
 
         <div class="card">
             <h2>Porque no alcanza para el nuevo Zelda</h2>
-            <p><strong>Nombre del Instructor:</strong> Porque Eres Pobre</p>
-            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <p><strong>Instructor:</strong> Porque Eres Pobre</p>
+            <p><strong>Fecha:</strong> 10/09/2026</p>
+            <!-- Botón que redirecciona a la página de registro -->
+            <a href="registro.html" class="btn-enviar" style="display: block; text-align: center; text-decoration: none; margin-top: 15px;">Registrarse al taller</a>
         </div>
     </main>
-
-    <!-- Sección del Formulario de Registro (Todo en la misma página) -->
-    <section>
-        <form class="formulario-registro">
-            <h2>Formulario de Registro</h2>
-            
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" class="input-campo" required placeholder="Ingresa tu nombre">
-
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" class="input-campo" required placeholder="correo@ejemplo.com">
-
-            <button type="submit" class="btn-enviar">Registrarse</button>
-        </form>
-    </section>
-
 </body>
 </html>
