@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.main-header {
+    background-color: #1a2b4c;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.main-header p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #d1d8e0;
+}
+
+.container-talleres {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #b2bec3;
+    border-radius: 6px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card h2 {
+    font-size: 18px;
+    color: #2d3436;
+    border-bottom: 1px solid #dfe6e9;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+.card p {
+    font-size: 13px;
+    color: #636e72;
+    line-height: 1.4;
+}
+
+.btn-taller {
+    display: inline-block;
+    background-color: #1a2b4c;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #b2bec3;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}

@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Catálogo de Talleres - CECyT 9</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Talleres - Cecyt 9</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-  <h1> Catalgo de talleres del Cecyt 9</h1>
-  <p> Selleciona una taller para registrar asistencia</p>
-</header>
-<main>
-  <section class="catalogo">
-    <article class="tarjeta">
-      <h2><a href="detalle.html">Introduccion a Phyron</a></h2>
-      <p>Nombre del Instructor: Ing Maria Conchita Alonso</p>
-      <p>Fecha: 15/03/2023</p>
-    </article>
+    <header class="main-header">
+        <h1>Catalogo de Talleres - Cecyt 9</h1>
+        <p>Selecciona un taller para registrar tu asistencia</p>
+    </header>
 
-    <article class="tarjeta">
-      <h2><a href="detalle.html">Introduccion a Phyron</a></h2>
-      <p>Nombre del Instructor: Ing Maria Jose Peña</p>
-      <p>Fecha: 15/03/2023</p>
-    </article>
+    <main class="container-talleres">
+        <div class="card">
+            <h2>Introduccion a Python</h2>
+            <p><strong>Nombre del Instructor:</strong> Maria Conchita Alonso</p>
+            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <a href="detalle.html" class="btn-taller">Ver taller</a>
+        </div>
 
-    <article class="tarjeta">
-      <h2><a href="detalle.html">Porque no alcanza para el nuevo Zelda</a></h2>
-      <p>Nombre del Instructor: Ing porque eres pobre</p>
-      <p>Fecha: 15/03/2023</p>
-    </article>
+        <div class="card">
+            <h2>Redes y chompus</h2>
+            <p><strong>Nombre del Instructor:</strong> Maria Jose Peña</p>
+            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <a href="detalle.html" class="btn-taller">Ver taller</a>
+        </div>
 
-  </section>
-</main>
+        <div class="card">
+            <h2>Porque no alcanza para el nuevo zelda</h2>
+            <p><strong>Nombre del Instructor:</strong> ing Porque Eres Pobre</p>
+            <p><strong>Fecha del taller:</strong> 10/09/2026</p>
+            <a href="detalle.html" class="btn-taller">Ver taller</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Registro de Asistencia - Cecyt 9</p>
+    </footer>
 </body>
-
 </html>
