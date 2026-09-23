@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios de Arreglos - 5IV7</title>
+    <!-- Aquí enlazamos los estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Práctica de Arreglos</h1>
+        <p><strong>Alumna:</strong> Lagarde Herrera Melani Yoryed | <strong>Grupo:</strong> 5IV7</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Método</th>
+                    <th>Descripción</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla">
+                <!-- Se llena automáticamente con JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Primero cargas tu archivo JS de arreglos -->
+    <!-- 1. Cargamos tu archivo JS -->
+    <script src="01-arreglos.js"></script>
+
+    <!-- 2. Código que dibuja la tabla dinámicamente -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tbody = document.getElementById("cuerpo-tabla");
+            
+            // Verificamos que 'resultadosTabla' exista en 01-arreglos.js
+            if (typeof resultadosTabla !== 'undefined') {
+                resultadosTabla.forEach(item => {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td><code>${item.metodo}</code></td>
+                        <td>${item.descripcion}</td>
+                        <td>${item.resultado}</td>
+                    `;
+                    tbody.appendChild(fila);
+                });
+            } else {
+                console.error("No se encontró la variable resultadosTabla en 01-arreglos.js");
+            }
+        });
+    </script>
+</body>
+</html>
