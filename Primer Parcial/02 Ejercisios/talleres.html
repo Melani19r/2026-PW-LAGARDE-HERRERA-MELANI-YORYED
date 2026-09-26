@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios con node</title>
-    <!-- Vinculamos los estilos desde la carpeta css -->
+    <!-- Enlace a los estilos -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <h2>Ejercicios con node</h2>
-    <h3>Arreglos del codigo <code>01-arreglos.js</code></h3>
-    <p>Datos de prueba con JS</p>
+    <!-- Encabezado superior -->
+    <div class="header-banner">
+        <h1>Ejercicios con node</h1>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Instructor</th>
-                <th>Cupo</th>
-                <th>Inscritos</th>
-            </tr>
-        </thead>
-        <tbody id="cuerpo-tabla">
-            <!-- Los datos del arreglo 01-arreglos.js se cargan aquí automáticamente -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h2>Arreglos del codigo <code>01-arreglos.js</code></h2>
+        <p class="subtext">Datos de prueba con JS</p>
 
-    <!-- Vinculamos tu archivo JS desde la carpeta js -->
+        <!-- Tabla de Talleres (Sin controles abajo) -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Instructor</th>
+                    <th>Cupo</th>
+                    <th>Inscritos</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla">
+                <!-- Se llena dinámicamente desde 01-arreglos.js -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Vinculamos el archivo JavaScript -->
     <script src="js/01-arreglos.js"></script>
 </body>
 </html>
