@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejecicios con Node</title>
-    <link rel="stylesheet" href="">
+    <title>Ejercicios con Node</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <h1>Ejercicios con node</h1>
     </header>
+    
     <main>
-        <section class="ejercicio" >
-            <h2 id="titulo-arreglos"> Arreglos del codigo <code>01-arreglos.js</code> </h2>
+        <!-- Sección 1: Arreglos -->
+        <section class="ejercicio">
+            <h2 id="titulo-arreglos">Arreglos del código <code>01-arreglos.js</code></h2>
             <p>Datos de prueba con JS</p>
-            <div class="tabla-scroll" >
+            <div class="tabla-scroll">
                 <table id="tabla-talleres">
                     <thead>
                         <tr>
@@ -25,14 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        <!-- Se llena dinámicamente mediante JavaScript -->
                     </tbody>
                 </table>
             </div>
 
-            <form id="form-arreglos" class="formulario" >
-                <div class="campos" >
-                    <label for="operacion-arreglo" name="operacion-arreglo">Operación</label>
+            <form id="form-arreglos" class="formulario">
+                <div class="campos">
+                    <label for="operacion-arreglo">Operación</label>
                     <select name="operacion-arreglo" id="operacion-arreglo">
                         <option value="forEach">ForEach - Lista Simple</option>
                         <option value="map">map - Copia solo Nombres</option>
@@ -41,66 +43,58 @@
                     </select>
                 </div>
 
-                <button type="submit" >Ejecutar</button>
-
+                <button type="submit">Ejecutar</button>
             </form>
 
-            <output class="resultado" id="resultado-arreglo" for="form-arreglo" ></output>
-          
+            <output class="resultado" id="resultado-arreglo" for="form-arreglos"></output>
         </section>
 
+        <!-- Sección 2: Manejo de Objetos y JSON -->
+        <section class="ejercicio" aria-label="titulo-objeto">
+            <h2 id="titulo-objeto">Manejo de objetos y Json</h2>
+            <p>Edita el taller y elige qué operación deseas aplicar</p>
 
-        <section  class="ejercisio" aria-label="titulo-objeto">
-            <h2 id="titulo-objeto">Manejo de objetos y Json </h2>
-            <p>Edita el taller y elejie que aperacion deasas aplicar</p>
+            <form id="form-objeto" class="formulario">
+                <div class="campo">
+                    <label for="obj-nombre">Nombre</label>
+                    <input type="text" name="obj-nombre" id="obj-nombre" value="Introducción a Python">
+                </div>
+            
+                <div class="campo">
+                    <label for="obj-instructor">Instructor</label>
+                    <input type="text" name="obj-instructor" id="obj-instructor" value="Ing. Maria Lopez">
+                </div>
 
-<form id="form-objeto" class="formulario"></form>
-<div class="campo">
-    <label for="obj-nombre">Nombre</label>
-    <input type="text" name="obj-nombre" value="Introducción a Python">
-    <div>
-    
-<div class="campo">
-    <label for="obj-nombre">Instructor</label>
-    <input type="text" name="obj-instructor" id="obj-instructor" value="Ing. Maria Lopez">
-    <div>
+                <div class="campo">
+                    <label for="obj-cupo">Cupo</label>
+                    <input type="number" name="obj-cupo" id="obj-cupo" value="25" min="0">
+                </div>
 
+                <div class="campo">
+                    <label for="obj-inscritos">Inscritos</label>
+                    <input type="number" name="obj-inscritos" id="obj-inscritos" value="25" min="0">
+                </div>
 
-<div class="campo">
-    <label for="obj-nombre">cupo</label>
-    <input type="text" name="obj-cupo" id="obj-cupo" value="25" min="0">
-    <div>
+                <div class="campo">
+                    <label for="operacion-objeto">Tipo de operaciones</label>
+                    <select name="operacion-objeto" id="operacion-objeto">
+                        <option value="keys">Object.keys</option>
+                        <option value="values">Object.values</option>
+                        <option value="entries">Object.entries</option>
+                        <option value="stringify">JSON a Cadena</option>
+                        <option value="roundtrip">Ida y vuelta (JSON)</option>
+                    </select>
+                </div>
 
-<div class="campo">
-    <label for="obj-nombre">Inscritos</label>
-    <input type="text" name="obj-inscritos" id="obj-inscritos" value="25" min="0">
-    <div>
+                <button type="submit">
+                    Ejecutar Opción
+                </button>
+            </form>
 
-<div class="campo">
-    <label for="operacion-objeto">Tipo de operaciones</label>
-   <select   type="text" name="operacion-objeto" id="operacion-objeto">
-     <option value="values">Object.values</option>
-
-                <option value="entries">Object.entries</option>
-
-                <option value="stringify">JSON a Cadena</option>
-
-                <option value="roundtrip">Ida y vuelta (JSON)</option>
-
-            </select>
-        </div>
-
-        <button type="submit">
-            Ejecutar Opción
-        </button>
-
-    </form>
-
-    <output class="resultado" id="resultado-objeto"></output>
-
-</section>
+            <output class="resultado" id="resultado-objeto"></output>
+        </section>
     </main>
 
-    <script src="./js/apps.js"></script>
+    <script src="js/apps.js"></script>
 </body>
 </html>
