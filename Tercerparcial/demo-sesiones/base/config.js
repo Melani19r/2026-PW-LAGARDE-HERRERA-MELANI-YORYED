@@ -7,17 +7,26 @@ module.exports = {
   almacen: 'mysql',
 
   // Cuánto dura la sesión, en milisegundos. 10 minutos = 10 * 60 * 1000
-maxAgeMs: 10 * 60 * 1000,
+  maxAgeMs: 10 * 60 * 1000,
 
   // true: cada petición reinicia el reloj de la expiración (la sesión vence por inactividad).
   // false: vence a la hora fija, aunque el usuario siga usando la página.
-rolling: false,
+  rolling: false,
 
   // true: el JavaScript de la página NO puede leer la cookie (document.cookie no la muestra).
   httpOnly: true,
+
   // 'lax': la cookie no viaja en peticiones POST que vienen de otros sitios. 'strict' es más estricto.
   sameSite: 'lax',
 
   // true: al iniciar sesión el servidor cambia el id de la sesión (protege contra la fijación de sesión).
-regenerarAlEntrar: true,
+  regenerarAlEntrar: true,
+
+  //para el jwt necesitamos 2 variables mas para poder manipular dicha sesión, la expiración se mide en segundos
+  jwtExpiraSeg : 5*60,
+
+  //tenemos que identificar si el token es valido o no para la sesión para ello vamos a revocarlo y colocarlo en una lista negra
+  jwtRevocar : true,
+
+
 };

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>JWT y Sesiones</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 12px; }
+    input, button { padding: 8px; margin: 4px 4px 4px 0; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+    .ok { color: #0a7d2c; } .error { color: #b00020; }
+  </style>
+</head>
+<body>
+  <h1>JWT y Sesiones</h1>
+
+  <h2>1. Login</h2>
+  <input id="usuario" placeholder="usuario" value="admin">
+  <input id="contrasena" type="password" placeholder="contraseña" value="admin12345">
+  <button id="btnLogin">Iniciar sesión (JWT)</button>
+
+  <h2>2. Rutas protegidas</h2>
+  <button id="btnPerfil">Perfil</button>
+  <button id="btnAdmin">Reporte admin</button>
+  <button id="btnRefresh">Refrescar token</button>
+  <button id="btnLogout">Logout (revocar)</button>
+  <p id="estado"></p>
+
+  <h2>3. Elementos de la sesión</h2>
+  <h3>Token</h3><pre id="token">(sin token)</pre>
+  <h3>Header</h3><pre id="header">-</pre>
+  <h3>Payload</h3><pre id="payload">-</pre>
+  <h3>Tiempos</h3><pre id="tiempos">-</pre>
+  <h3>Última respuesta del servidor</h3><pre id="respuesta">-</pre>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let token = null;
+
+    function decodificar(parte) {
+      const b64 = parte.replace(/-/g, '+').replace(/_/g, '/');
+      const texto = decodeURIComponent(atob(b64).split('').map(
+        (c) => '%' + c.charCodeAt(0).toString(16).padStart(2, '0')).join(''));
+      return JSON.parse(texto);
+    }
+
+    function pintarToken(t) {
+      token = t;
+      $('token').textContent = t;
+      const [h, p] = t.split('.');
+      const header = decodificar(h);
+      const payload = decodificar(p);
+      $('header').textContent = JSON.stringify(header, null, 2);
+      $('payload').textContent = JSON.stringify(payload, null, 2);
+      $('tiempos').textContent =
+        'Emitido (iat): ' + new Date(payload.iat * 1000).toLocaleString() + '\n' +
+        'Expira (exp):  ' + new Date(payload.exp * 1000).toLocaleString() + '\n' +
+        'Id del token (jti): ' + payload.jti;
+    }
+
+    function estado(texto, bien) {
+      $('estado').textContent = texto;
+      $('estado').className = bien ? 'ok' : 'error';
+    }
+
+    async function llamar(ruta, metodo, cuerpo) {
+      const opciones = { method: metodo || 'GET', headers: { 'Content-Type': 'application/json' } };
+      if (token) opciones.headers.Authorization = 'Bearer ' + token;
+      if (cuerpo) opciones.body = JSON.stringify(cuerpo);
+      const r = await fetch(ruta, opciones);
+      const datos = await r.json().catch(() => ({}));
+      $('respuesta').textContent = r.status + ' ' + (metodo || 'GET') + ' ' + ruta + '\n' + JSON.stringify(datos, null, 2);
+      return { ok: r.ok, datos };
+    }
+
+    $('btnLogin').onclick = async () => {
+      const { ok, datos } = await llamar('/api/jwt/login', 'POST', {
+        usuario: $('usuario').value, contrasena: $('contrasena').value });
+      if (!ok) return estado(datos.error || 'Error de login', false);
+      pintarToken(datos.token);
+      estado('Login correcto: token recibido', true);
+    };
+
+    $('btnPerfil').onclick = async () => {
+      const { ok, datos } = await llamar('/api/jwt/perfil');
+      estado(ok ? 'Perfil correcto (200)' : datos.error, ok);
+    };
+
+    $('btnAdmin').onclick = async () => {
+      const { ok, datos } = await llamar('/api/jwt/admin/reporte');
+      estado(ok ? 'Acceso de admin permitido (200)' : datos.error, ok);
+    };
+
+    $('btnRefresh').onclick = async () => {
+      const { ok, datos } = await llamar('/api/jwt/refresh', 'POST');
+      if (ok) pintarToken(datos.token);
+      estado(ok ? 'Token nuevo emitido' : datos.error, ok);
+    };
+
+    $('btnLogout').onclick = async () => {
+      const { ok, datos } = await llamar('/api/jwt/logout', 'POST');
+      estado(ok ? datos.mensaje : datos.error, ok);
+    };
+  </script>
+</body>
+</html>
