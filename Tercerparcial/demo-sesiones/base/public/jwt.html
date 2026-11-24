@@ -2,40 +2,113 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>JWT y Sesiones</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JWT y Sesiones · CECyT 9</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 12px; }
-    input, button { padding: 8px; margin: 4px 4px 4px 0; }
-    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
-    .ok { color: #0a7d2c; } .error { color: #b00020; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f4f5f8; color: #1d1d27; }
+    header { background: #6b1d45; color: #fff; padding: 22px 30px; }
+    header h1 { margin: 0 0 6px; font-size: 28px; }
+    header p { margin: 0; font-size: 16px; }
+    main { max-width: 1120px; margin: 24px auto; padding: 0 16px; display: grid; gap: 18px;
+           grid-template-columns: repeat(3, 1fr); }
+    .panel { background: #fff; border: 1px solid #dfe1e8; border-radius: 14px; padding: 20px; }
+    .panel h2 { margin: 0 0 14px; font-size: 20px; }
+    .ancho2 { grid-column: span 2; }
+    .ancho3 { grid-column: span 3; }
+    .nota { color: #5d6070; font-size: 14px; line-height: 1.5; }
+    label { display: block; font-weight: 600; margin: 10px 0 6px; }
+    select, input { width: 100%; padding: 11px; font-size: 16px; border: 1px solid #cfd2dc; border-radius: 8px; background: #fff; }
+    button { background: #6b1d45; color: #fff; border: 0; border-radius: 8px; padding: 12px 16px;
+             font-size: 15px; cursor: pointer; margin: 4px 6px 4px 0; }
+    button:hover { opacity: .9; }
+    button.peligro { background: #b3261e; }
+    button.claro { background: #e9e4ea; color: #4b1a35; }
+    button.ancho { width: 100%; margin-top: 14px; }
+    .estado { padding: 14px; border-radius: 8px; font-size: 17px; margin-bottom: 12px; }
+    .con-sesion { background: #e6f5ea; color: #1b6b32; }
+    .sin-sesion { background: #fde8e8; color: #b3261e; }
+    .aviso { background: #eaf0ff; color: #243b8a; padding: 14px; border-radius: 8px; font-size: 17px; margin-bottom: 12px; }
+    pre { background: #f0f1f5; padding: 12px; border-radius: 8px; margin: 8px 0 12px; font-size: 13px;
+          white-space: pre-wrap; word-break: break-all; }
+    h3 { margin: 12px 0 0; font-size: 15px; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { border-top: 1px solid #e3e5ec; padding: 10px 0; }
+    li pre { margin-bottom: 0; }
+    .codigo { font-weight: 700; padding: 2px 8px; border-radius: 6px; color: #fff; }
+    .ok { background: #1b8a3a; } .e401 { background: #c77700; } .e403 { background: #b3261e; } .error { background: #555; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } .ancho2, .ancho3 { grid-column: span 1; } }
   </style>
 </head>
 <body>
-  <h1>JWT y Sesiones</h1>
+  <header>
+    <h1>JWT y Sesiones · CECyT 9</h1>
+    <p>Aquí el servidor no guarda la sesión: el navegador guarda el token y lo manda en cada petición.</p>
+  </header>
 
-  <h2>1. Login</h2>
-  <input id="usuario" placeholder="usuario" value="admin">
-  <input id="contrasena" type="password" placeholder="contraseña" value="admin12345">
-  <button id="btnLogin">Iniciar sesión (JWT)</button>
+  <main>
+    <!-- 1 -->
+    <section class="panel">
+      <h2>1 · ¿Quién soy para el servidor?</h2>
+      <div id="estado" class="estado sin-sesion">Sin token</div>
+      <p class="nota">El token vive en la memoria de esta página (una variable de JavaScript), no en una cookie.</p>
+      <button id="btnPreguntar">Volver a preguntar</button>
+      <button id="btnOlvidar" class="claro">Olvidar token</button>
+    </section>
 
-  <h2>2. Rutas protegidas</h2>
-  <button id="btnPerfil">Perfil</button>
-  <button id="btnAdmin">Reporte admin</button>
-  <button id="btnRefresh">Refrescar token</button>
-  <button id="btnLogout">Logout (revocar)</button>
-  <p id="estado"></p>
+    <!-- 2 -->
+    <section class="panel">
+      <h2>2 · Iniciar sesión</h2>
+      <label for="usuario">Usuario</label>
+      <select id="usuario">
+        <option value="ana">ana (alumno)</option>
+        <option value="luis">luis (alumno)</option>
+        <option value="admin">admin (admin)</option>
+      </select>
+      <label for="contrasena">Contraseña</label>
+      <input id="contrasena" type="password" value="ana12345">
+      <button id="btnEntrar" class="ancho">Entrar</button>
+      <p class="nota">Contraseñas: ana12345, luis12345 y admin12345.</p>
+    </section>
 
-  <h2>3. Elementos de la sesión</h2>
-  <h3>Token</h3><pre id="token">(sin token)</pre>
-  <h3>Header</h3><pre id="header">-</pre>
-  <h3>Payload</h3><pre id="payload">-</pre>
-  <h3>Tiempos</h3><pre id="tiempos">-</pre>
-  <h3>Última respuesta del servidor</h3><pre id="respuesta">-</pre>
+    <!-- 3 -->
+    <section class="panel">
+      <h2>3 · Pedirle cosas al servidor</h2>
+      <button data-metodo="GET" data-url="/api/jwt/perfil">GET /api/jwt/perfil</button>
+      <button data-metodo="GET" data-url="/api/jwt/admin/reporte">GET /api/jwt/admin/reporte</button>
+      <button data-metodo="POST" data-url="/api/jwt/refresh">POST /api/jwt/refresh</button>
+      <button data-metodo="POST" data-url="/api/jwt/logout" class="peligro">POST /api/jwt/logout</button>
+    </section>
+
+    <!-- 4 -->
+    <section class="panel ancho2">
+      <h2>4 · Elementos del token (lo que lleva la sesión)</h2>
+      <div class="aviso">El payload no está cifrado: cualquiera puede leerlo. La firma es lo que impide modificarlo.</div>
+      <h3>Token</h3><pre id="token">(sin token)</pre>
+      <h3>Header</h3><pre id="header">-</pre>
+      <h3>Payload</h3><pre id="payload">-</pre>
+      <h3>Tiempos</h3><pre id="tiempos">-</pre>
+    </section>
+
+    <!-- 5 -->
+    <section class="panel">
+      <h2>5 · Configuración actual (config.js)</h2>
+      <pre id="config">(cargando…)</pre>
+    </section>
+
+    <!-- Bitácora -->
+    <section class="panel ancho3">
+      <h2>Bitácora de respuestas del servidor</h2>
+      <ul id="bitacora"></ul>
+    </section>
+  </main>
 
   <script>
     const $ = (id) => document.getElementById(id);
     let token = null;
+    let payload = null;
 
+    // Convierte una parte del token (base64url) en objeto
     function decodificar(parte) {
       const b64 = parte.replace(/-/g, '+').replace(/_/g, '/');
       const texto = decodeURIComponent(atob(b64).split('').map(
@@ -43,63 +116,118 @@
       return JSON.parse(texto);
     }
 
-    function pintarToken(t) {
+    function claseDelCodigo(status) {
+      if (status >= 200 && status < 300) return 'codigo ok';
+      if (status === 401) return 'codigo e401';
+      if (status === 403) return 'codigo e403';
+      return 'codigo error';
+    }
+
+    // Todas las peticiones pasan por aquí; mandan el token en Authorization
+    async function llamar(metodo, url, cuerpo) {
+      const opciones = { method: metodo, headers: {} };
+      if (token) opciones.headers.Authorization = 'Bearer ' + token;
+      if (cuerpo !== undefined) {
+        opciones.headers['Content-Type'] = 'application/json';
+        opciones.body = JSON.stringify(cuerpo);
+      }
+      const respuesta = await fetch(url, opciones);
+      let datos = null;
+      try { datos = await respuesta.json(); } catch { datos = null; }
+      return { status: respuesta.status, datos };
+    }
+
+    // textContent para que el texto del servidor nunca se interprete como HTML
+    function anotar(metodo, url, status, datos) {
+      const li = document.createElement('li');
+      const codigo = document.createElement('span');
+      codigo.className = claseDelCodigo(status);
+      codigo.textContent = status;
+      const peticion = document.createElement('span');
+      peticion.textContent = ` ${metodo} ${url}`;
+      const json = document.createElement('pre');
+      json.textContent = JSON.stringify(datos, null, 2);
+      li.append(codigo, peticion, json);
+      $('bitacora').prepend(li);
+    }
+
+    function guardarToken(t) {
       token = t;
-      $('token').textContent = t;
+      if (!t) {
+        payload = null;
+        $('token').textContent = '(sin token)';
+        $('header').textContent = '-';
+        $('payload').textContent = '-';
+        $('tiempos').textContent = '-';
+        pintarEstado();
+        return;
+      }
       const [h, p] = t.split('.');
-      const header = decodificar(h);
-      const payload = decodificar(p);
-      $('header').textContent = JSON.stringify(header, null, 2);
+      payload = decodificar(p);
+      $('token').textContent = t;
+      $('header').textContent = JSON.stringify(decodificar(h), null, 2);
       $('payload').textContent = JSON.stringify(payload, null, 2);
       $('tiempos').textContent =
         'Emitido (iat): ' + new Date(payload.iat * 1000).toLocaleString() + '\n' +
         'Expira (exp):  ' + new Date(payload.exp * 1000).toLocaleString() + '\n' +
         'Id del token (jti): ' + payload.jti;
+      pintarEstado();
     }
 
-    function estado(texto, bien) {
-      $('estado').textContent = texto;
-      $('estado').className = bien ? 'ok' : 'error';
+    // Se actualiza cada segundo para ver cuánto le queda al token
+    function pintarEstado() {
+      const caja = $('estado');
+      if (!token || !payload) {
+        caja.textContent = 'Sin token';
+        caja.className = 'estado sin-sesion';
+        return;
+      }
+      const quedan = payload.exp - Math.floor(Date.now() / 1000);
+      if (quedan <= 0) {
+        caja.textContent = `${payload.nombre} (${payload.rol}) · token expirado: el servidor responderá 401`;
+        caja.className = 'estado sin-sesion';
+      } else {
+        caja.textContent = `${payload.nombre} (${payload.rol}) · el token vence en ${quedan} s`;
+        caja.className = 'estado con-sesion';
+      }
+    }
+    setInterval(pintarEstado, 1000);
+
+    async function cargarConfig() {
+      const { status, datos } = await llamar('GET', '/api/config');
+      $('config').textContent = status === 200 ? JSON.stringify(datos, null, 2) : `No se pudo leer (${status})`;
     }
 
-    async function llamar(ruta, metodo, cuerpo) {
-      const opciones = { method: metodo || 'GET', headers: { 'Content-Type': 'application/json' } };
-      if (token) opciones.headers.Authorization = 'Bearer ' + token;
-      if (cuerpo) opciones.body = JSON.stringify(cuerpo);
-      const r = await fetch(ruta, opciones);
-      const datos = await r.json().catch(() => ({}));
-      $('respuesta').textContent = r.status + ' ' + (metodo || 'GET') + ' ' + ruta + '\n' + JSON.stringify(datos, null, 2);
-      return { ok: r.ok, datos };
-    }
+    // Para no escribir la contraseña cada vez que se cambia de usuario
+    $('usuario').addEventListener('change', () => {
+      $('contrasena').value = $('usuario').value + '12345';
+    });
 
-    $('btnLogin').onclick = async () => {
-      const { ok, datos } = await llamar('/api/jwt/login', 'POST', {
-        usuario: $('usuario').value, contrasena: $('contrasena').value });
-      if (!ok) return estado(datos.error || 'Error de login', false);
-      pintarToken(datos.token);
-      estado('Login correcto: token recibido', true);
-    };
+    $('btnEntrar').addEventListener('click', async () => {
+      const cuerpo = { usuario: $('usuario').value, contrasena: $('contrasena').value };
+      const { status, datos } = await llamar('POST', '/api/jwt/login', cuerpo);
+      anotar('POST', '/api/jwt/login', status, datos);
+      if (status === 200 && datos && datos.token) guardarToken(datos.token);
+    });
 
-    $('btnPerfil').onclick = async () => {
-      const { ok, datos } = await llamar('/api/jwt/perfil');
-      estado(ok ? 'Perfil correcto (200)' : datos.error, ok);
-    };
+    $('btnPreguntar').addEventListener('click', async () => {
+      const { status, datos } = await llamar('GET', '/api/jwt/perfil');
+      anotar('GET', '/api/jwt/perfil', status, datos);
+    });
 
-    $('btnAdmin').onclick = async () => {
-      const { ok, datos } = await llamar('/api/jwt/admin/reporte');
-      estado(ok ? 'Acceso de admin permitido (200)' : datos.error, ok);
-    };
+    $('btnOlvidar').addEventListener('click', () => guardarToken(null));
 
-    $('btnRefresh').onclick = async () => {
-      const { ok, datos } = await llamar('/api/jwt/refresh', 'POST');
-      if (ok) pintarToken(datos.token);
-      estado(ok ? 'Token nuevo emitido' : datos.error, ok);
-    };
+    document.querySelectorAll('button[data-url]').forEach((boton) => {
+      boton.addEventListener('click', async () => {
+        const { metodo, url } = boton.dataset;
+        const { status, datos } = await llamar(metodo, url);
+        anotar(metodo, url, status, datos);
+        // El refresh devuelve un token nuevo: se reemplaza el que teníamos
+        if (url === '/api/jwt/refresh' && status === 200 && datos && datos.token) guardarToken(datos.token);
+      });
+    });
 
-    $('btnLogout').onclick = async () => {
-      const { ok, datos } = await llamar('/api/jwt/logout', 'POST');
-      estado(ok ? datos.mensaje : datos.error, ok);
-    };
+    cargarConfig();
   </script>
 </body>
 </html>
